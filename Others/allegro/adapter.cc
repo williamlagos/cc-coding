@@ -2,8 +2,12 @@
  * Allegro sample
  */
 #include <allegro.h>
+#include "adapter.h"
 
-Allegro::Allegro(string name) : Adapter(name){}
+Allegro::Allegro()
+{
+
+}
 
 bool Allegro::helloWorld(char* word, int width, int height)
 {
@@ -30,10 +34,9 @@ bool Allegro::helloWorld(char* word, int width, int height)
 
 int main(int argc, char** argv)
 {
-        Allegro *algr = new Allegro("Algr");
-	string response = algr->methodCall("base_method");
-	char *sz = new char[response.length() + 1];
-	strcpy(sz, response.c_str());
+    Allegro *algr = new Allegro();
+	char *sz = new char[12];
+	strcpy(sz, "Hello World!");
 	if(argc <= 1)
 		algr->helloWorld(sz,320,200);
 	else
