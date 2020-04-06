@@ -17,37 +17,49 @@
  * along with elements. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PHYSICS_H
-#define PHYSICS_H
+#ifndef GRAPHICS_H
+#define GRAPHICS_H
 
-#include <Box2D/Box2D.h>
-#include <modules.h>
+#define WIDTH 800
+#define HEIGHT 600
 
-class Physics {
-private:
-    b2Body *groundBody,*body;
-    b2Vec2 gravity;
-    b2World world;
-    b2BodyDef groundBodyDef,bodyDef;
-    b2PolygonShape groundBox,dynamicBox;
-    b2FixtureDef fixtureDef;
-    float timeStep;
-    int velocityIterations,positionIterations;
-public:
-    Physics();
-    void initBOX2D(b2World *wrd);
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+
+#include <vector>
+#include <time.h>
+
+using namespace std;
+
+struct vec {
+    float x;
+    float y;
 };
 
-class Control { //Input
+class Engine {
 public:
-    Control();
+    Engine();
+    static void init();
+    static void display();
+    static void reshape(int, int);
+    static void defineDirection();
+    static void idle();
+    static void initGL(void);
+    static void initGLUT(int, char**);
+    static int start(int, char**);
 };
 
-class Input : Package{
-private:
-    Control *control;
-public:
-    Input();
+#ifndef TEXRECT_H
+#define TEXRECT_H
+
+// Struct to hold texture coords for each frame
+struct TexRect
+{
+    float u1, v1;
+    float u2, v2;
 };
 
-#endif /* PHYSICS_H */
+#endif // TEXRECT_H
+
+#endif /* GRAPHICS_H */

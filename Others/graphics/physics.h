@@ -1,6 +1,6 @@
 /*
  * This file is part of elements project.
- *
+ * 
  * Copyright (C) 2009-2011 William Oliveira de Lagos <william.lagos@icloud.com>
  *
  * Elements is free software: you can redistribute it and/or modify
@@ -17,52 +17,28 @@
  * along with elements. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#ifndef PHYSICS_H
+#define PHYSICS_H
 
-#include <iostream>
-#include <SDL/SDL.h>
-#include <AL/al.h>
-#include <AL/alut.h>
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include <Box2D/Box2D.h>
+// #include <modules.h>
 
-#define numOf(x) (sizeof(x)/sizeof*(x))
+class Physics {
+public:
+    Physics();
+    static void start(int, char**);
+};
 
-using std::cout;
-using std::endl;
-using std::string;
+class Control { //Input
+public:
+    Control();
+};
 
-namespace Zhockon{
-class SDL : public Library{
+class Input {
 private:
-	int axisx;
-	int axisy;
-	SDL_Event keyevent;
+    Control *control;
 public:
-	SDL(string,int,int);
-	int baseMove();
+    Input();
 };
 
-class OpenAL : public Library{
-private:
-	ALuint Buffer;
-	ALuint Source;
-	ALfloat* SourcePos;
-	ALfloat* SourceVel;
-public:
-	OpenAL(int,char**,string);
-	ALboolean loadSound(char*);
-};
-
-class OpenGL : public Library{
-public:
-	OpenGL(string);
-	void Init(int,char**,int,int);
-	void loopCycle();
-};
-static void baseScene(void);
-static void baseReshape(int,int);
-};
-
-#endif /* PLATFORM_H */
+#endif /* PHYSICS_H */

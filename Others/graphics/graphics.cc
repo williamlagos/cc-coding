@@ -20,19 +20,15 @@
 #include <graphics.h>
 #include <physics.h>
 
-Engine::Engine() {
-    counter = 0;
-    direction = true;
-    x = 0.0005f;
-    y = 0.0005f;
-    z = 0.0f;
-}
+int counter = 0;
+int direction = true;
+int x = 0.0005f;
+int y = 0.0005f;
+int z = 0.0f;
 
 void Engine::reshape(int w, int h)
 {
-    width = w;
-    height = h;
-    glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+    glViewport (0, 0, (GLsizei) WIDTH, (GLsizei) HEIGHT);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-1, 1, -1, 1, -1, 1);
@@ -41,7 +37,6 @@ void Engine::reshape(int w, int h)
 
 void Engine::defineDirection()
 {
-    world.Step(timeStep,1, positionIterations);
     vec position;
     position.x = 0.01f;
     position.y = 0.01f;
@@ -59,7 +54,7 @@ void Engine::defineDirection()
 
 void Engine::display(void)
 {
-    load_json("elements.json");
+    // load_json("elements.json");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glTranslatef(x,y,z);  
     glColor3f(1.0,0.0,0.0); 
@@ -103,20 +98,19 @@ void Engine::initGLUT(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_STENCIL); // display mode
-    glutInitWindowSize(width,height);
+    glutInitWindowSize(WIDTH,HEIGHT);
     glutInitWindowPosition(0,0);
-    main_window = glutCreateWindow("BoxGL");
-    glutDisplayFunc(display);
+    glutCreateWindow("BoxGL");
+    glutDisplayFunc(Engine::display);
     glutIdleFunc(idle);
     glutReshapeFunc(reshape);
 }
 
-int Engine::startEngine(int argc, char** argv)
+int Engine::start(int argc, char** argv)
 {
     srand(time(0));
     initGLUT(argc, argv);
     initGL();
-    initBOX2D(&world);
     glutMainLoop();
     return 0;
 }
