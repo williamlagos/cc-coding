@@ -20,13 +20,6 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
-/*#include <osgAL/SoundManager>
-#include <osg/Group>
-#include <osg/Geode>
-#include <osg/Geometry>
-#include <osg/PositionAttitudeTransform>
-#include <osgViewer/Viewer>
-#include <openalpp/Source>*/
 #include <iostream>
 #include <SDL/SDL.h>
 #include <AL/al.h>

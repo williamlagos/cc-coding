@@ -20,7 +20,7 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-/*#include <GLUT/glut.h>
+#include <GLUT/glut.h>
 #ifndef __APPLE__
  #include <GL/gl.h>
  #include <GL/glu.h>
@@ -28,11 +28,10 @@
  #include <OpenGL/gl.h>
  #include <OpenGL/glu.h>
 #endif
-#include <Box2D/Box2D.h>*/
+#include <Box2D/Box2D.h>
 
 #include <vector>
 #include <time.h>
-//#include <elements.h>
 
 using namespace std;
 

@@ -20,44 +20,17 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-/*#include <GLUT/glut.h>
-#ifndef __APPLE__
- #include <GL/gl.h>
- #include <GL/glu.h>
-#else
- #include <OpenGL/gl.h>
- #include <OpenGL/glu.h>
-#endif
-#include <Box2D/Box2D.h>*/
+#include <osgAL/SoundManager>
+#include <osg/Group>
+#include <osg/Geode>
+#include <osg/Geometry>
+#include <osg/PositionAttitudeTransform>
+#include <osgViewer/Viewer>
 
 #include <vector>
 #include <time.h>
-//#include <elements.h>
 
 using namespace std;
-
-class Engine {
-private:
-    int counter;
-    int mainWindow;
-    int width, height;
-    bool direction;
-    float x,y,z;
-    struct vec {
-        int x;
-        int y;
-    };
-public:
-    Engine();
-    void init();
-    void display();
-    void reshape(int, int);
-    void defineDirection();
-    void idle();
-    void initGL(void);
-    void initGLUT(int, char**);
-    int startEngine(int, char**);
-};
 
 template <class T>
 class Matrix {

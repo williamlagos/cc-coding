@@ -18,7 +18,6 @@
  */
 
 #include <platform.h>
-using namespace Zhockon;
 
 Library::Library(string n) : Module(n,status)
 {

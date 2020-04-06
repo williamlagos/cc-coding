@@ -20,22 +20,22 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-//#include <Box2D/Box2D.h>
+#include <Box2D/Box2D.h>
 #include <modules.h>
 
 class Physics {
 private:
-    /*b2Body *groundBody,*body;
+    b2Body *groundBody,*body;
     b2Vec2 gravity;
     b2World world;
     b2BodyDef groundBodyDef,bodyDef;
     b2PolygonShape groundBox,dynamicBox;
-    b2FixtureDef fixtureDef;*/
+    b2FixtureDef fixtureDef;
     float timeStep;
     int velocityIterations,positionIterations;
 public:
     Physics();
-    void initBOX2D(/*b2World *wrd*/);
+    void initBOX2D(b2World *wrd);
 };
 
 class Control { //Input

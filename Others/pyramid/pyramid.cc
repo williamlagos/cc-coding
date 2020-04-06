@@ -17,14 +17,14 @@
  * along with Zhockon. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <zhockon.h>
-using namespace Zhockon;
+#include <audio.h>
+#include <graphics.h>
 
 int main(int argc, char* argv[]){
 	//Core core;
 	//core.testLibs();
 	//core.confCore(true);
-	Zhockon::OpenGL *GL;
-	GL->Init(argc,argv,640,480);
-	GL->loopCycle();
+	// Zhockon::OpenGL *GL;
+	// GL->Init(argc,argv,640,480);
+	// GL->loopCycle();
 };
