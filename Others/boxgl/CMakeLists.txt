@@ -8,13 +8,13 @@ if(WIN32)
 endif()
 
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/)
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 
 set(GRAPHICS_LIBRARIES ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} Box2D json)
-set(GRAPHICS_SOURCES elements.cpp physics.cpp graphics.cpp main.cpp)
+set(GRAPHICS_SOURCES physics.cc graphics.cc platform.cc main.cc)
 
 add_executable(graphics ${GRAPHICS_SOURCES})
 target_link_libraries(graphics ${GRAPHICS_LIBRARIES})
