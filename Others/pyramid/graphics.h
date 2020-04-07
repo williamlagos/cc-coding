@@ -20,86 +20,37 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-#include <osgAL/SoundManager>
+#include <osg/Node>
 #include <osg/Group>
 #include <osg/Geode>
 #include <osg/Geometry>
-#include <osg/PositionAttitudeTransform>
+#include <osg/Texture2D>
+#include <osgDB/ReadFile>
 #include <osgViewer/Viewer>
+#include <osg/PositionAttitudeTransform>
+#include <osgGA/TrackballManipulator>
 
 #include <vector>
 #include <time.h>
 
 using namespace std;
 
-template <class T>
-class Matrix {
-public:
-    Matrix();
-};
-
-class Surface {
-public:
-    Surface(int);
-    void whichPoints(std::vector<int>);
-};
-
-class Geometry {
-public:
-//    void createParent(Group*);
-    void createColorBind();
-    void whichVertexMatrix(Matrix<int>*);
-    void whichColorsMatrix(Matrix<float>*);
-    void createPrimitiveSet(Surface*);
-};
-
-class Group {
-public:
-    void addChild(Geometry*);
-};
-
 class Scene {
 private:
-    Group* root;
+    osg::Group* root;
+    // osg::Geode* objectGeode;
+    // osg::Geometry* objectGeo;
 public:
     Scene();
-    void createPyramid();
-    void createCube();
-    void whichPrimitives(int, vector<int>, Geometry*);
+    void* createPyramid();
+    void* createCube();
+    void whichPrimitives(int, vector<int>, osg::Geometry*);
     void* defineVertices();
-    void* linkSceneObject(Geometry*);
+    void* linkSceneObject(osg::Geometry*);
     void* createObject();
-    void* defineColors(Geometry*);
-    void transformMode(Geometry*);
+    void* defineColors(osg::Geometry*);
+    void transformMode(osg::Geometry*);
     void drawScene();
 };
-
-class View{
-public:
-      View();
-      void setSceneData();
-      void run();
-};
-
-class Graphics {
-private:
-    Surface *surface;
-    Geometry *geometry;
-    Scene *scene;
-public:
-    Graphics();
-};
-
-#ifndef TEXRECT_H
-#define TEXRECT_H
-
-// Struct to hold texture coords for each frame
-struct TexRect
-{
-    float u1, v1;
-    float u2, v2;
-};
-
-#endif // TEXRECT_H
 
 #endif /* GRAPHICS_H */

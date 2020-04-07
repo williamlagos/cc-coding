@@ -21,10 +21,9 @@
 #include <graphics.h>
 
 int main(int argc, char* argv[]){
-	//Core core;
-	//core.testLibs();
-	//core.confCore(true);
-	// Zhockon::OpenGL *GL;
-	// GL->Init(argc,argv,640,480);
-	// GL->loopCycle();
+	Scene* sce = new Scene();
+	sce->linkSceneObject((osg::Geometry*)sce->createPyramid());
+	// sce->linkSceneObject((osg::Geometry*)sce->createCube());
+	sce->drawScene();
+	return 0;
 };
