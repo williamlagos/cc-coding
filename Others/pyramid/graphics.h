@@ -38,18 +38,15 @@ using namespace std;
 class Scene {
 private:
     osg::Group* root;
-    // osg::Geode* objectGeode;
-    // osg::Geometry* objectGeo;
+    osg::Geode* objectGeode;
+    osg::Geometry* objectGeo;
 public:
     Scene();
-    void* createPyramid();
-    void* createCube();
-    void whichPrimitives(int, vector<int>, osg::Geometry*);
-    void* defineVertices();
-    void* linkSceneObject(osg::Geometry*);
-    void* createObject();
-    void* defineColors(osg::Geometry*);
-    void transformMode(osg::Geometry*);
+    void createPyramid();
+    void createCube();
+    void* definePyramidVertices();
+    void* defineCubeVertices();
+    void defineColors();
     void drawScene();
 };
 

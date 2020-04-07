@@ -22,8 +22,8 @@
 
 int main(int argc, char* argv[]){
 	Scene* sce = new Scene();
-	sce->linkSceneObject((osg::Geometry*)sce->createPyramid());
-	// sce->linkSceneObject((osg::Geometry*)sce->createCube());
+	// sce->createPyramid();
+	sce->createCube();
 	sce->drawScene();
 	return 0;
 };

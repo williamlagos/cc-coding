@@ -22,105 +22,13 @@
 Scene::Scene() 
 {
     root = new osg::Group();
-    // objectGeo = new osg::Geometry();
-    // objectGeode = new osg::Geode();
+    objectGeode = new osg::Geode();
+    objectGeo = new osg::Geometry();
+    objectGeode->addDrawable(objectGeo);
+    root->addChild(objectGeode);
 }
 
-void* Scene::createPyramid()
-{
-    osg::Geometry* objGeo = (osg::Geometry*)createObject();
-    osg::DrawElementsUInt* basePyramid =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
-    basePyramid->push_back(3);
-    basePyramid->push_back(2);
-    basePyramid->push_back(1);
-    basePyramid->push_back(0);
-    objGeo->addPrimitiveSet(basePyramid);
-        
-    osg::DrawElementsUInt* pFaceOne =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);   
-    pFaceOne->push_back(0);
-    pFaceOne->push_back(1);
-    pFaceOne->push_back(4);
-    objGeo->addPrimitiveSet(pFaceOne);
-
-    osg::DrawElementsUInt* pFaceTwo =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);   
-    pFaceTwo->push_back(1);
-    pFaceTwo->push_back(2);
-    pFaceTwo->push_back(4);
-    objGeo->addPrimitiveSet(pFaceTwo);
-
-    osg::DrawElementsUInt* pFaceThree =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);   
-    pFaceThree->push_back(2);
-    pFaceThree->push_back(3);
-    pFaceThree->push_back(4);
-    objGeo->addPrimitiveSet(pFaceThree);
-
-    osg::DrawElementsUInt* pFaceFour =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);   
-    pFaceFour->push_back(3);
-    pFaceFour->push_back(0);
-    pFaceFour->push_back(4);
-    objGeo->addPrimitiveSet(pFaceFour);
-    
-    defineColors(objGeo);
-}
-void* Scene::createCube()
-{
-    osg::Geometry* objGeo = (osg::Geometry*)createObject();
-    osg::DrawElementsUInt* basePyramid =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
-    basePyramid->push_back(3);
-    basePyramid->push_back(2);
-    basePyramid->push_back(1);
-    basePyramid->push_back(0);
-    objGeo->addPrimitiveSet(basePyramid);
-
-    osg::DrawElementsUInt* pFaceOne =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
-    pFaceOne->push_back(1);
-    pFaceOne->push_back(0);
-    pFaceOne->push_back(3);
-    pFaceOne->push_back(4);
-    objGeo->addPrimitiveSet(pFaceOne);
-
-    osg::DrawElementsUInt* pFaceTwo =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
-    pFaceTwo->push_back(1);
-    pFaceTwo->push_back(1);
-    pFaceTwo->push_back(2);
-    pFaceTwo->push_back(4);
-    objGeo->addPrimitiveSet(pFaceTwo);
-
-    osg::DrawElementsUInt* pFaceThree =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
-    pFaceThree->push_back(1);
-    pFaceThree->push_back(2);
-    pFaceThree->push_back(1);
-    pFaceThree->push_back(4);
-    objGeo->addPrimitiveSet(pFaceThree);
-
-    osg::DrawElementsUInt* pFaceFour =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
-    pFaceFour->push_back(1);
-    pFaceFour->push_back(3);
-    pFaceFour->push_back(0);
-    pFaceFour->push_back(4);
-    objGeo->addPrimitiveSet(pFaceFour);
-
-    osg::DrawElementsUInt* pBaseUp =
-        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
-    pBaseUp->push_back(2);
-    pBaseUp->push_back(1);
-    pBaseUp->push_back(2);
-    pBaseUp->push_back(3);
-    objGeo->addPrimitiveSet(pBaseUp);
-    
-    defineColors(objGeo);
-}
-void* Scene::defineVertices()
+void* Scene::definePyramidVertices()
 {
     osg::Vec3Array* objVertices = new osg::Vec3Array;
     osg::Vec3 FrontLeft  = osg::Vec3(0,0,0);
@@ -134,22 +42,127 @@ void* Scene::defineVertices()
     objVertices->push_back(BackLeft); // back left
     objVertices->push_back(Peak); // peak
     return (void*)objVertices;
+}
 
-}
-void* Scene::linkSceneObject(osg::Geometry* objectGeo)
+void* Scene::defineCubeVertices()
 {
-    osg::Geode* objectGeode = new osg::Geode();
-    objectGeode->addDrawable(objectGeo);
-    root->addChild(objectGeode);
-    return (void*)objectGeo;
+    osg::Vec3Array* objVertices = new osg::Vec3Array;
+    osg::Vec3 FrontLeft  = osg::Vec3(0,0,0);
+    osg::Vec3 FrontRight = osg::Vec3(10,0,0);
+    osg::Vec3 BackRight  = osg::Vec3(10,10,0);
+    osg::Vec3 BackLeft   = osg::Vec3(0,10,0);
+    osg::Vec3 TopFrontLeft  = osg::Vec3(0,0,10);
+    osg::Vec3 TopFrontRight = osg::Vec3(10,0,10);
+    osg::Vec3 TopBackRight  = osg::Vec3(10,10,10);
+    osg::Vec3 TopBackLeft   = osg::Vec3(0,10,10);
+    objVertices->push_back(FrontLeft); // front left
+    objVertices->push_back(FrontRight); // front right
+    objVertices->push_back(BackRight); // back right
+    objVertices->push_back(BackLeft); // back left
+    objVertices->push_back(TopFrontLeft); // front left
+    objVertices->push_back(TopFrontRight); // front right
+    objVertices->push_back(TopBackRight); // back right
+    objVertices->push_back(TopBackLeft); // back left
+    return (void*)objVertices;
 }
-void* Scene::createObject()
+
+void Scene::createPyramid()
 {
-    osg::Geometry* objectGeometry = new osg::Geometry();
-    objectGeometry->setVertexArray((osg::Vec3Array*)defineVertices());
-    return (void*)objectGeometry;
+    objectGeo->setVertexArray((osg::Vec3Array*)definePyramidVertices());
+
+    osg::DrawElementsUInt* basePyramid =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    basePyramid->push_back(3);
+    basePyramid->push_back(2);
+    basePyramid->push_back(1);
+    basePyramid->push_back(0);
+    objectGeo->addPrimitiveSet(basePyramid);
+        
+    osg::DrawElementsUInt* pFaceOne =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);   
+    pFaceOne->push_back(0);
+    pFaceOne->push_back(1);
+    pFaceOne->push_back(4);
+    objectGeo->addPrimitiveSet(pFaceOne);
+
+    osg::DrawElementsUInt* pFaceTwo =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);   
+    pFaceTwo->push_back(1);
+    pFaceTwo->push_back(2);
+    pFaceTwo->push_back(4);
+    objectGeo->addPrimitiveSet(pFaceTwo);
+
+    osg::DrawElementsUInt* pFaceThree =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);   
+    pFaceThree->push_back(2);
+    pFaceThree->push_back(3);
+    pFaceThree->push_back(4);
+    objectGeo->addPrimitiveSet(pFaceThree);
+
+    osg::DrawElementsUInt* pFaceFour =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);   
+    pFaceFour->push_back(3);
+    pFaceFour->push_back(0);
+    pFaceFour->push_back(4);
+    objectGeo->addPrimitiveSet(pFaceFour);
+    
+    defineColors();
 }
-void* Scene::defineColors(osg::Geometry* objectGeo)
+void Scene::createCube()
+{
+    objectGeo->setVertexArray((osg::Vec3Array*)defineCubeVertices());
+
+    osg::DrawElementsUInt* basePyramid =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    basePyramid->push_back(3);
+    basePyramid->push_back(2);
+    basePyramid->push_back(1);
+    basePyramid->push_back(0);
+    objectGeo->addPrimitiveSet(basePyramid);
+
+    osg::DrawElementsUInt* pFaceOne =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    pFaceOne->push_back(1);
+    pFaceOne->push_back(0);
+    pFaceOne->push_back(3);
+    pFaceOne->push_back(4);
+    objectGeo->addPrimitiveSet(pFaceOne);
+
+    osg::DrawElementsUInt* pFaceTwo =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    pFaceTwo->push_back(1);
+    pFaceTwo->push_back(1);
+    pFaceTwo->push_back(2);
+    pFaceTwo->push_back(4);
+    objectGeo->addPrimitiveSet(pFaceTwo);
+
+    osg::DrawElementsUInt* pFaceThree =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    pFaceThree->push_back(1);
+    pFaceThree->push_back(2);
+    pFaceThree->push_back(1);
+    pFaceThree->push_back(4);
+    objectGeo->addPrimitiveSet(pFaceThree);
+
+    osg::DrawElementsUInt* pFaceFour =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    pFaceFour->push_back(1);
+    pFaceFour->push_back(3);
+    pFaceFour->push_back(0);
+    pFaceFour->push_back(4);
+    objectGeo->addPrimitiveSet(pFaceFour);
+
+    osg::DrawElementsUInt* pBaseUp =
+        new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    pBaseUp->push_back(2);
+    pBaseUp->push_back(1);
+    pBaseUp->push_back(2);
+    pBaseUp->push_back(3);
+    objectGeo->addPrimitiveSet(pBaseUp);
+    
+    defineColors();
+}
+void Scene::defineColors()
 {
     osg::Vec4Array* colors = new osg::Vec4Array;
     osg::Vec4 Red   = osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -163,21 +176,7 @@ void* Scene::defineColors(osg::Geometry* objectGeo)
 
     objectGeo->setColorArray(colors);
     objectGeo->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
-    return NULL;
 }
-void Scene::transformMode(osg::Geometry* objectGeo)
-{
-    /*PositionAttitudeTransform* objectTwoXForm =
-        new PositionAttitudeTransform();*/
-    osg::Geode* objectGeode = new osg::Geode();
-    objectGeode->addDrawable(objectGeo);
-    root->addChild(objectGeode);
-
-    /*int objTwoPos[3] = {15,0,0};
-        vector<int> objectTwoPosition(objTwoPos,objTwoPos+sizeof(objTwoPos)/sizeof(int));
-        objectTwoXForm->setPosition(objectTwoPosition);*/
-}
-
 void Scene::drawScene()
 {
     osgViewer::Viewer viewer;
