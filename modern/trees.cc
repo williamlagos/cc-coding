@@ -1,55 +1,45 @@
 #include<iostream>
+#include<memory>
 
-using namespace std;
-
-class Node {
+class node {
     public:
         int data;
-        Node *left;
-        Node *right;
-        Node(int d) {
+        std::shared_ptr<node> left;
+        std::shared_ptr<node> right;
+        node(int d) {
             data = d;
-            left = NULL;
-            right = NULL;
+            left = nullptr;
+            right = nullptr;
         }
 };
 
-class Solution {
-    public:
-  		Node* insert(Node* root, int data) {
-            if(root == NULL) {
-                return new Node(data);
+class tree {
+public:
+    std::shared_ptr<node> insert(std::shared_ptr<node> root, int data) {
+        if(root == nullptr) {
+            return std::make_shared<node>(data);
+        } else {
+            if(data <= root->data) {
+                root->left = this->insert(root->left, data);
             } else {
-                Node* cur;
-                if(data <= root->data) {
-                    cur = insert(root->left, data);
-                    root->left = cur;
-                } else {
-                    cur = insert(root->right, data);
-                    root->right = cur;
-                }
+                root->right = this->insert(root->right, data);
+            }
 
-               return root;
-           }
+            return root;
         }
-/*The tree node has data, left child and right child 
-class Node {
-    int data;
-    Node* left;
-    Node* right;
-};
-
-*/
-    int height(Node* root) {
-        // Write your code here.
     }
 
-}; //End of Solution
+    int height(std::shared_ptr<node> x) {
+        if (x == nullptr) return 0;
+        return std::max(height(x->left), height(x->right)) + 1;
+    }
+
+}; // End of tree
 
 int main() {
     
-    Solution myTree;
-    Node* root = NULL;
+    tree myTree;
+    std::shared_ptr<node> root = nullptr;
     
     int t;
     int data;
@@ -62,7 +52,7 @@ int main() {
     }
   
     int height = myTree.height(root);
-    std::cout << height;
+    std::cout << height << std::endl;
 
     return 0;
 }
