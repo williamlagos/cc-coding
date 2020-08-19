@@ -27,10 +27,12 @@ int main (int argc, char** argv) {
     g.emplace_back(std::make_shared<node<int>>(0));
     g.emplace_back(std::make_shared<node<int>>(1));
     g.emplace_back(std::make_shared<node<int>>(2));
+    g.emplace_back(std::make_shared<node<int>>(3));
     g[0]->neighbors.emplace_back(g.get(1));
     g[1]->neighbors.emplace_back(g.get(0));
     g[2]->neighbors.emplace_back(g.get(0));
     g[2]->neighbors.emplace_back(g.get(1));
+
     auto ptr = g.get(0);
     std::cout << ptr.lock()->value << std::endl;
     ptr = ptr.lock()->neighbors[0];
@@ -44,10 +46,12 @@ int main (int argc, char** argv) {
     ptr = ptr.lock()->neighbors[0];
     std::cout << ptr.lock()->value << std::endl;
     std::cout << "graph" << std::endl;
-    for(auto n: g) {
+    for (auto n: g) {
         std::cout << "node: " << n->value << std::endl;
-        std::cout << "neighbors: ";
-        for(auto v: n->neighbors) {
+        std::cout << "connections:" << n->neighbors.size() << std::endl;
+        if (n->neighbors.size() > 0) std::cout << "neighbors: ";
+        else std::cout << "no neighbors";
+        for (auto v: n->neighbors) {
             std::cout << v.lock()->value << " ";
         }
         std::cout << std::endl;
