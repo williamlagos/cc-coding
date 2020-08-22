@@ -1,7 +1,21 @@
 #include<iostream>
+#include<cmath>
+
+constexpr int square(int x) {
+  return x * x;
+}
+
+// `unsigned long long` parameter required for integer literal.
+long long operator "" _celsius(unsigned long long tempCelsius) {
+  return std::llround(tempCelsius * 1.8 + 32);
+}
 
 int main(int argc, char** argv) {
     int x = 1;
+
+    std::cout << square(x) << std::endl;
+
+    std::cout << 24_celsius << std::endl; // == 75
 
     // [] - captures nothing.
     // [=] - capture local objects (local variables, parameters) in scope by value.
