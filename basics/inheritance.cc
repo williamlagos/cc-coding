@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <memory>
 
 class Person {
     protected:
@@ -65,8 +64,8 @@ int main() {
         std::cin >> tmpScore;
         scores.push_back(tmpScore);
     }
-    auto s = std::make_unique<Student>(firstName, lastName, id, scores);
-    s->printPerson();
-    std::cout << "Grade: " << s->calculate() << "\n";
+    Student s(firstName, lastName, id, scores);
+    s.printPerson();
+    std::cout << "Grade: " << s.calculate() << "\n";
     return 0;
 }
