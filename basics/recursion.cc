@@ -1,7 +1,6 @@
 #include <iostream>
+#include <limits>
 #include <fstream>
-
-using namespace std;
 
 // Complete the factorial function below.
 int factorial(int n) {
@@ -11,11 +10,11 @@ int factorial(int n) {
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
+    std::ofstream fout(getenv("OUTPUT_PATH"));
 
     int n;
-    cin >> n;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    std::cin >> n;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     int result = factorial(n);
 

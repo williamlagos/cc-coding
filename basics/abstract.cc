@@ -4,18 +4,14 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
-using namespace std;
-class Book{
-    protected:
-        string title;
-        string author;
-    public:
-        Book(string t,string a){
-            title=t;
-            author=a;
-        }
-        virtual void display()=0;
 
+class Book {
+    protected:
+        std::string title;
+        std::string author;
+    public:
+        Book(std::string t, std::string a) : title{std::move(t)}, author{std::move(a)} {}
+        virtual void display() = 0;
 };
 
 class MyBook : Book {
@@ -30,19 +26,18 @@ class MyBook : Book {
         //   author - The book's author.
         //   price - The book's price.
         //
-        MyBook(string title, string author, int price) :
-        Book(title, author) {
-            this->price = price;
+        MyBook(std::string title, std::string author, int price) :
+        Book(std::move(title), std::move(author)), price{price} {
             // Write your constructor here
         }
     
         //   Function Name: display
         //   Print the title, author, and price in the specified format.
         //
-        void display() {
-            cout << "Title: " << this->title << endl;
-            cout << "Author: " << this->author << endl;
-            cout << "Price: " << this->price << endl;
+        void display() override {
+            std::cout << "Title: " << this->title << std::endl;
+            std::cout << "Author: " << this->author << std::endl;
+            std::cout << "Price: " << this->price << std::endl;
         }
         // Write your method here
     
@@ -50,12 +45,12 @@ class MyBook : Book {
 };
 
 int main() {
-    string title,author;
+    std::string title, author;
     int price;
-    getline(cin,title);
-    getline(cin,author);
-    cin>>price;
-    MyBook novel(title,author,price);
+    std::getline(std::cin, title);
+    std::getline(std::cin, author);
+    std::cin >> price;
+    MyBook novel(title, author, price);
     novel.display();
     return 0;
 }

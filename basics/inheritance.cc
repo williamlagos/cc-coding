@@ -1,29 +1,24 @@
 #include <iostream>
 #include <vector>
+#include <memory>
 
-using namespace std;
-
-class Person{
-	protected:
-		string firstName;
-		string lastName;
-		int id;
-	public:
-		Person(string firstName, string lastName, int identification){
-			this->firstName = firstName;
-			this->lastName = lastName;
-			this->id = identification;
-		}
-		void printPerson(){
-			cout<< "Name: "<< lastName << ", "<< firstName <<"\nID: "<< id << "\n"; 
-		}
-	
+class Person {
+    protected:
+        std::string firstName;
+        std::string lastName;
+        int id;
+    public:
+        Person(std::string firstName, std::string lastName, int identification)
+            : firstName{std::move(firstName)}, lastName{std::move(lastName)}, id{identification} {}
+        void printPerson() {
+            std::cout << "Name: " << lastName << ", " << firstName << "\nID: " << id << "\n"; 
+        }
 };
 
-class Student :  public Person{
-	private:
-		vector<int> testScores;  
-	public:
+class Student : public Person {
+    private:
+        std::vector<int> testScores;  
+    public:
         /*	
         *   Class Constructor
         *   
@@ -34,10 +29,8 @@ class Student :  public Person{
         *   scores - An array of integers denoting the Person's test scores.
         */
         // Write your constructor here
-        Student(string firstName, string lastName, int id, vector<int> testScores) :
-        Person(firstName, lastName, id) {
-            this->testScores = testScores;
-        }
+        Student(std::string firstName, std::string lastName, int id, std::vector<int> testScores) :
+        Person(std::move(firstName), std::move(lastName), id), testScores{std::move(testScores)} {}
 
         /*	
         *   Function Name: calculate
@@ -47,8 +40,8 @@ class Student :  public Person{
         char calculate() {
             char s = ' ';
             int sum = 0;
-            int numScores = testScores.size();
-            for (int i = 0; i < numScores; i++) sum += testScores[i];
+            int numScores = static_cast<int>(testScores.size());
+            for (int score : testScores) sum += score;
             int avgScore = sum / numScores;
             if (avgScore >= 90 && avgScore <= 100) s = 'O';
             else if (avgScore >= 80 && avgScore < 90) s = 'E';
@@ -61,19 +54,19 @@ class Student :  public Person{
 };
 
 int main() {
-	string firstName;
-  	string lastName;
-	int id;
-  	int numScores;
-	cin >> firstName >> lastName >> id >> numScores;
-  	vector<int> scores;
-  	for(int i = 0; i < numScores; i++){
-	  	int tmpScore;
-	  	cin >> tmpScore;
-		scores.push_back(tmpScore);
-	}
-	Student* s = new Student(firstName, lastName, id, scores);
-	s->printPerson();
-	cout << "Grade: " << s->calculate() << "\n";
-	return 0;
+    std::string firstName;
+    std::string lastName;
+    int id;
+    int numScores;
+    std::cin >> firstName >> lastName >> id >> numScores;
+    std::vector<int> scores;
+    for (int i = 0; i < numScores; i++) {
+        int tmpScore;
+        std::cin >> tmpScore;
+        scores.push_back(tmpScore);
+    }
+    auto s = std::make_unique<Student>(firstName, lastName, id, scores);
+    s->printPerson();
+    std::cout << "Grade: " << s->calculate() << "\n";
+    return 0;
 }

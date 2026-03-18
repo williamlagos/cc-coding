@@ -1,19 +1,18 @@
 #include <iostream>
-
-using namespace std;
+#include <limits>
 
 int main()
 {
     int N;
-    cin >> N;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    std::cin >> N;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     if (N % 2 != 0) {
-        cout << "Weird" << endl;
-    } else if (N%2 == 0) {
-        if (N >= 2 && N <= 5) cout << "Not Weird" << endl;
-        else if (N >= 6 && N <= 20) cout << "Weird" << endl;
-        else if (N > 20) cout << "Not Weird" << endl;
+        std::cout << "Weird" << std::endl;
+    } else if (N % 2 == 0) {
+        if (N >= 2 && N <= 5) std::cout << "Not Weird" << std::endl;
+        else if (N >= 6 && N <= 20) std::cout << "Weird" << std::endl;
+        else if (N > 20) std::cout << "Not Weird" << std::endl;
     }
 
     return 0;
