@@ -1,7 +1,6 @@
-using namespace std;
 #include <iostream>
 
-class Person{
+class Person {
     public:
         int age;
         Person(int initialAge);
@@ -9,42 +8,42 @@ class Person{
         void yearPasses();
     };
 
-    Person::Person(int initialAge){
+    Person::Person(int initialAge) {
         // Add some more code to run some checks on initialAge
         if (initialAge >= 0) {
             age = initialAge;
         } else {
-            cout << "Age is not valid, setting age to 0." << endl;
+            std::cout << "Age is not valid, setting age to 0." << std::endl;
             age = 0;
         }
     }
 
-    void Person::amIOld(){
+    void Person::amIOld() {
         // Do some computations in here and print out the correct statement to the console 
-        if (age < 13) cout << "You are young." << endl;
-        else if (age >= 13 && age < 18) cout << "You are a teenager." << endl;
-        else if (age >= 18) cout << "You are old." << endl;
+        if (age < 13) std::cout << "You are young." << std::endl;
+        else if (age >= 13 && age < 18) std::cout << "You are a teenager." << std::endl;
+        else if (age >= 18) std::cout << "You are old." << std::endl;
     }
 
-    void Person::yearPasses(){
+    void Person::yearPasses() {
         // Increment the age of the person in here
         age++;
     }
 
-int main(){
+int main() {
     int t;
-	int age;
-    cin >> t;
-    for(int i=0; i < t; i++) {
-    	cin >> age;
+    int age;
+    std::cin >> t;
+    for (int i = 0; i < t; i++) {
+        std::cin >> age;
         Person p(age);
         p.amIOld();
-        for(int j=0; j < 3; j++) {
-        	p.yearPasses(); 
+        for (int j = 0; j < 3; j++) {
+            p.yearPasses(); 
         }
         p.amIOld();
       
-		cout << '\n';
+        std::cout << '\n';
     }
 
     return 0;

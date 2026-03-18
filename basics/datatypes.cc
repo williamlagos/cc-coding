@@ -2,32 +2,30 @@
 #include <iomanip>
 #include <limits>
 
-using namespace std;
-
 int main() {
     int i = 4;
     double d = 4.0;
-    string s = "HackerRank ";
+    std::string s = "HackerRank ";
 
     
     // Declare second integer, double, and String variables.
     int i0;
     double d0;
-    string s0; 
+    std::string s0; 
     
     // Read and save an integer, double, and String to your variables.
-    cin >> i0;
-    cin >> d0;
-    getline(cin >> ws, s0);
+    std::cin >> i0;
+    std::cin >> d0;
+    std::getline(std::cin >> std::ws, s0);
 
     // Note: If you have trouble reading the entire string, please go back and review the Tutorial closely.
     
     // Print the sum of both integer variables on a new line.
-    cout << i + i0 << endl;
+    std::cout << i + i0 << std::endl;
     // Print the sum of the double variables on a new line.
-    cout << fixed << setprecision(1) << d + d0 << endl;
+    std::cout << std::fixed << std::setprecision(1) << d + d0 << std::endl;
     // Concatenate and print the String variables on a new line
     // The 's' variable above should be printed first.
-    cout << s + s0 << endl;
+    std::cout << s + s0 << std::endl;
     return 0;
 }

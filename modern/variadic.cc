@@ -5,7 +5,7 @@ template <typename First, typename... Rest>
 void print(const First &first, Rest &&... args)
 {
     std::cout << first << std::endl;
-    print(args...);
+    print(std::forward<Rest>(args)...);
 }
 
 int main(int argc, char** argv) {

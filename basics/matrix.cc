@@ -1,19 +1,18 @@
 #include <iostream>
+#include <limits>
 #include <vector>
-
-using namespace std;
 
 int main()
 {
-    vector<vector<int>> arr(6);
+    std::vector<std::vector<int>> arr(6);
     for (int i = 0; i < 6; i++) {
         arr[i].resize(6);
 
         for (int j = 0; j < 6; j++) {
-            cin >> arr[i][j];
+            std::cin >> arr[i][j];
         }
 
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     int max = -9 * 7;
     for (int i = 0; i < 6; i++) {
@@ -26,7 +25,7 @@ int main()
             }
         }
     }
-    cout << max;
+    std::cout << max;
 
     return 0;
 }

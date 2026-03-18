@@ -1,14 +1,13 @@
 #include <iostream>
-
-using namespace std;
+#include <limits>
 
 int main()
 {
     int n;
-    cin >> n;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    std::cin >> n;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     for (int t = 1; t <= 10; t++) {
-        cout << n << " x " << t << " = " << n * t << endl;
+        std::cout << n << " x " << t << " = " << n * t << std::endl;
     }
     return 0;
 }

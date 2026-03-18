@@ -1,12 +1,11 @@
 #include <iostream>
-
-using namespace std;
+#include <limits>
 
 int main()
 {
     int n;
-    cin >> n;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    std::cin >> n;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     int count = 0;
     int max = 0;
     // vector<int> binary;
@@ -29,6 +28,6 @@ int main()
             count = 1;
         }
     } */
-    cout << max;
+    std::cout << max;
     return 0;
 }

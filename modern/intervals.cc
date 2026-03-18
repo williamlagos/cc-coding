@@ -22,8 +22,8 @@ public:
 		// Type properties constraint check
 		static_assert(sizeof(std::declval<K>() < std::declval<K>()) < 2, "Missing minor operator"  ) ;
     	static_assert(sizeof(std::declval<V>() == std::declval<V>()) < 2, "Missing equals operator") ;
-		auto keyIsCopyAssignable = std::is_copy_assignable<K>::value;
-		auto valIsCopyAssignable = std::is_copy_assignable<V>::value;
+		auto keyIsCopyAssignable = std::is_copy_assignable_v<K>;
+		auto valIsCopyAssignable = std::is_copy_assignable_v<V>;
 		if (!keyIsCopyAssignable || !valIsCopyAssignable) return;
 		if (!(keyBegin < keyEnd)) return;
 

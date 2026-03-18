@@ -4,26 +4,24 @@
 #include <iostream>
 #include <algorithm>
 
-using namespace std;
-
 int main() {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
     int t;
-    cin >> t;
-    vector<string> strings;
+    std::cin >> t;
+    std::vector<std::string> strings;
     for (int i = 0; i < t; i++) {
-        string str;
-        getline(cin >> ws, str);
+        std::string str;
+        std::getline(std::cin >> std::ws, str);
         strings.push_back(str);
     }
     for (int i = 0; i < t; i++) {
-        string s = strings[i];
-        string odd, eve;
-        for (int j = 0; j < s.length(); j++) {
+        const std::string& s = strings[i];
+        std::string odd, eve;
+        for (std::size_t j = 0; j < s.length(); j++) {
             if (j % 2 == 0) eve += s[j];
-            else if (j % 2 != 0) odd += s[j];
+            else odd += s[j];
         }
-        cout << eve << " " << odd << endl;
+        std::cout << eve << " " << odd << std::endl;
     }
     return 0;
 }

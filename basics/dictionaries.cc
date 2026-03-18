@@ -5,25 +5,23 @@
 #include <algorithm>
 #include <unordered_map>
 
-using namespace std;
-
 int main() {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
     int count;
-    unordered_map<string, string> phoneBook; 
-    cin >> count;
+    std::unordered_map<std::string, std::string> phoneBook; 
+    std::cin >> count;
     for (int i = count; i > 0; i--) {
-        string name, number;
-        cin >> name;
-        cin >> number;
+        std::string name, number;
+        std::cin >> name;
+        std::cin >> number;
         phoneBook[name] = number;
     }
-    string str;
-    while(getline(cin >> ws, str)) {
+    std::string str;
+    while (std::getline(std::cin >> std::ws, str)) {
         if (phoneBook.find(str) != phoneBook.end()) {
-            cout << str << "=" << phoneBook[str] << endl;
+            std::cout << str << "=" << phoneBook[str] << std::endl;
         } else {
-            cout << "Not found" << endl;
+            std::cout << "Not found" << std::endl;
         }
     }
     return 0;
